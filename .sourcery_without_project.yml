@@ -1,0 +1,6 @@
+sources:
+  - SourceryAutoInit # Имя проекта
+templates:
+  - Templates/Sourcery # Относительный путь к шаблонам
+output:
+  SourceryAutoInit/Models/AutoInit # Путь до сгенерированных файлов
