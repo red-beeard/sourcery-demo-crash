@@ -1,0 +1,40 @@
+
+{# Метод для генерации инициалиизации #}
+{# #}
+{% macro generateInitializationClassOrStruct type %}
+{# #}
+{% typed type as Type %}
+{# #}
+    {% if type.kind == "class" %}required {% endif %}init(
+    {% for variable in type.storedVariables %}
+        {{ variable.name }}: {{ variable.typeName.name }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    ) {
+    {% for variable in type.storedVariables %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
+    }
+
+    {% if type.kind == "class" %}convenience {% endif %}init() {
+        self.init(
+        {% for variable in type.storedVariables %}
+            {{ variable.name }}: {% if variable.isOptional %}nil{% else %}{{ variable.typeName.unwrappedTypeName }}(){% endif %}{% if not forloop.last %},{% endif %}
+        {% if forloop.last %}){% endif %}
+        {% endfor %}
+    }
+{# #}
+{% endmacro %}
+
+{# Метод для генерации инициалиизации #}
+{# #}
+{% macro generateInitialization type %}
+{# #}
+{% typed type as Type %}
+{# #}
+{% if type.kind == "struct" or type.kind == "class" %}
+{% call generateInitializationClassOrStruct type %}
+{% elif type.kind == "enum" %}
+{% call generateInitializationEnum type %}
+{% endif %}
+{# #}
+{% endmacro %}

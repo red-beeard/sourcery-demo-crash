@@ -1,0 +1,9 @@
+{% import "common.stencil" %}
+{% for type in types.classes where type.implements["AutoInit"] %}
+{# #}
+{# Генерация иницализатора в файл #}
+{# #}
+// sourcery:inline:auto:{{ type.name }}.AutoInit
+{% call generateInitialization type %}
+// sourcery:end
+{% endfor %}

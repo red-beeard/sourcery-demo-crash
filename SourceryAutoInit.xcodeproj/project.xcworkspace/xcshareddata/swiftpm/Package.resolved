@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "sourcery-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/red-beeard/sourcery-plugin",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0a87d9cb6c6c6075b17d7e1f8fe74e9d69d06a1e"
+      }
+    }
+  ],
+  "version" : 2
+}
